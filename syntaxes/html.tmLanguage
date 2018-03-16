@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>html</string>
+		<string>htm</string>
+		<string>shtml</string>
+		<string>xhtml</string>
+		<string>inc</string>
+		<string>tmpl</string>
+		<string>tpl</string>
+		<string>feed</string>
+	</array>
+	<key>name</key>
+	<string>Expression Engine</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>include</key>
+			<string>text.html.basic</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>source.php</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#ee-comment</string>
+		</dict>
+	</array>
+	<key>repository</key>
+	<dict>
+		<key>ee-comment</key>
+		<dict>
+			<key>begin</key>
+			<string>{!--</string>
+			<key>end</key>
+			<string>--}</string>
+			<key>name</key>
+			<string>comment.block.documentation.ee</string>
+		</dict>
+	</dict>
+	<key>scopeName</key>
+	<string>text.html.expressionengine</string>
+</dict>
+</plist>
