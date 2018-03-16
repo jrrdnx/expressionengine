@@ -5,7 +5,7 @@
 	],
 	"foldingStartMarker": "(^\\s*/\\*|(\\{|\\[|\\()\\s*$)",
 	"foldingStopMarker": "(\\*/|^\\s*(\\}|\\]|\\)))",
-	"name": "Expression Engine",
+	"name": "ExpressionEngine",
 	"patterns": [
 		{
 			"include": "text.html.basic"

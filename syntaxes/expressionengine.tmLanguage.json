@@ -1,5 +1,5 @@
 {
-	"name": "Expression Engine",
+	"name": "ExpressionEngine",
 	"scopeName": "text.html.expressionengine",
 	"injections": {
 		"R:text.html - (comment.block, text.html source)": {

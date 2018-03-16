@@ -14,7 +14,7 @@
 		<string>feed</string>
 	</array>
 	<key>name</key>
-	<string>Expression Engine</string>
+	<string>ExpressionEngine</string>
 	<key>patterns</key>
 	<array>
 		<dict>

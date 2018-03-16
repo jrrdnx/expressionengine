@@ -1,8 +1,8 @@
 {
     "name": "expressionengine",
-    "displayName": "Expression Engine",
-    "description": "Expression Engine syntax highlighting for VS Code",
-    "version": "0.0.1",
+    "displayName": "ExpressionEngine",
+    "description": "ExpressionEngine syntax highlighting for VS Code",
+    "version": "0.0.2",
 	"publisher": "jrrdnx",
 	"license": "SEE LICENSE IN ./LICENSE",
 	"icon": "expressionengine.png",
@@ -15,7 +15,7 @@
     "contributes": {
         "languages": [{
             "id": "expressionengine",
-            "aliases": ["Expression Engine", "expressionengine"],
+            "aliases": ["ExpressionEngine", "expressionengine"],
             "extensions": [".html",".feed"],
             "configuration": "./language-configuration.json"
         }],
