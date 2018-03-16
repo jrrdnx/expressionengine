@@ -5,7 +5,7 @@
     "version": "0.0.1",
 	"publisher": "jrrdnx",
 	"license": "SEE LICENSE IN ./LICENSE",
-	"icon": "./expressionengine.png",
+	"icon": "expressionengine.png",
     "engines": {
         "vscode": "^1.0.0"
     },
