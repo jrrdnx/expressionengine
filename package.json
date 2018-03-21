@@ -2,10 +2,10 @@
     "name": "expressionengine",
     "displayName": "ExpressionEngine",
     "description": "ExpressionEngine syntax highlighting for VS Code",
-    "version": "0.0.2",
-	"publisher": "jrrdnx",
-	"license": "SEE LICENSE IN ./LICENSE",
-	"icon": "expressionengine.png",
+    "version": "0.0.4",
+    "publisher": "jrrdnx",
+    "license": "SEE LICENSE IN ./LICENSE",
+    "icon": "expressionengine.png",
     "engines": {
         "vscode": "^1.0.0"
     },
@@ -13,20 +13,30 @@
         "Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "expressionengine",
-            "aliases": ["ExpressionEngine", "expressionengine"],
-            "extensions": [".html",".feed"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "expressionengine",
-            "scopeName": "text.html.expressionengine",
-            "path": "./syntaxes/expressionengine.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "expressionengine",
+                "aliases": [
+                    "ExpressionEngine",
+                    "expressionengine"
+                ],
+                "extensions": [
+                    ".html",
+                    ".feed"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "expressionengine",
+                "scopeName": "text.html.expressionengine",
+                "path": "./syntaxes/expressionengine.tmLanguage.json"
+            }
+        ]
     },
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/jrrdnx/expressionengine"
-	}
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jrrdnx/expressionengine"
+    }
 }
