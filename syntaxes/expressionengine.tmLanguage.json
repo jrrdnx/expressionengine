@@ -50,7 +50,7 @@
 			]
 		},
 		"expressionengine-parameters": {
-			"match": "\\s([:\\w]+)=",
+			"match": "\\s([:\\w]+)=?",
 			"captures": {
 				"1": {
 					"name": "variable.parameter.expressionengine"

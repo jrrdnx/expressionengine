@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.6
+
+* Add support for value-less parameters
+
 ## 0.0.5
 
 * Update README with color override instructions/example
