@@ -1,0 +1,68 @@
+{layout="site/_wrapper"}
+
+{exp:channel:entries
+	backspace="5"
+	category="1|2|3|5|8|13"
+	channel="page"
+	disable="categories|category_fields|member_data|pagination"
+	limit="1"
+	orderby="<?php echo @$_GET['order'] ?>"
+	require_entry="yes"
+	search:entry_date="{current_time format='%l'}"}
+
+	{layout:set name="title"}{title}{/layout:set}
+	{layout:set name="metadata"}{embed="embeds/_metadata" entry_id="{entry_id}"}{/layout:set}
+	{layout:set name="banner"}{if banner}{entry_id}{if:else}default{/if}{/layout:set}
+
+	{!-- test comment --}
+	{tp_template_partial}
+
+	{embed="embeds/_forms"}
+
+	{if segment_1 == 'blog' OR segment_2 == 'test'}
+		{DATE_W3C}
+	{if:elseif segment_3}
+		{current_time format='%F %j, %Y'}
+	{if:else if segment_4}
+		{layout:name}
+	{if:else}
+		<div>test string</div>
+	{/if}
+
+	<?php
+		define('TEST_CONSTANT', 'test value');
+
+		$date = new Date();
+
+		echo $date->format('M j, Y');
+
+		function testFunction($arg1, $arg2) {
+			public $foo = <<<EOT
+bar
+EOT;
+		}
+
+		echo "string with an expression engine variable like {current_time} in it";
+	?>
+
+	{!-- TEST
+		 COMMENT
+		 BLOCK --}
+
+	<article id="uniqueID">
+		<section class="repeatedClassName">
+			<h1>{title}</h1>
+			<p>Vestibulum id ligula porta felis euismod semper. Donec sed odio dui. Sed posuere consectetur est at lobortis.</p>
+			<p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+			<p><?php echo "php block in html"; ?></p>
+		</section>
+
+		{!-- test comment --}
+		{tp_template_partial}
+
+	</article>
+
+	{if no_results}
+		{redirect="404"}
+	{/if}
+{/exp:channel:entries}
