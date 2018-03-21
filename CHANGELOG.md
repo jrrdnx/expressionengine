@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.7
+
+* Add support for tags with unknown number of segments
+
 ## 0.0.6
 
 * Add support for value-less parameters

@@ -21,7 +21,7 @@
 	],
 	"repository": {
 		"expressionengine-tags": {
-			"begin": "{/?(exp):(\\w*):?(\\w*)?",
+			"begin": "{/?(exp)((?::\\w*)+)",
 			"end": "}",
 			"captures": {
 				"1": {
