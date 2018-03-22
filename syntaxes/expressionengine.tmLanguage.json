@@ -109,7 +109,7 @@
 			]
 		},
 		"expressionengine-keyword-operators": {
-			"match": "\\s(==|!=|<>|<|<=|>|>=|\\^=|\\*=|\\$=|~|!|\\&\\&|\\|\\||AND|XOR|OR|\\+|-|\\*|\\*\\*|\\^|/|%|\\.)\\s",
+			"match": "\\s?(==|!=|<>|<|<=|>|>=|\\^=|\\*=|\\$=|~|!|\\&\\&|\\|\\||AND|XOR|OR|\\+|-|\\*|\\*\\*|\\^|/|%|\\.)\\s?",
 			"captures": {
 				"1": {
 					"name": "keyword.operator.expressionengine"

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.8
+
+* Make spaces around keyword operators optional
+
 ## 0.0.7
 
 * Add support for tags with unknown number of segments
