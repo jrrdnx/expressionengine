@@ -4,6 +4,10 @@ Enables syntax highlighting for ExpressionEngine's templating language, includin
 
 ![feature X](./example.png)
 
+## Settings
+
+* `expressionengine.suggest.basic`: enable/disable language suggestions (tags and variables). Default: **true**
+
 ## Customizing Colors
 
 To add or override your current theme's colors, add an `editor.tokenColorCustomizations` rule to your User Settings. E.g.
@@ -35,7 +39,7 @@ To add or override your current theme's colors, add an `editor.tokenColorCustomi
 }
 ```
 
-As of **0.0.5** the following naming conventions are used:
+As of **v0.0.4** the following naming conventions are used:
 
 * **entity.name.tag.expressionengine**: any tag beginning with `{exp:`
 * **variable.parameter.expressionengine**: tag parameters such as `channel` or `entry_id` used with channel entries tags, `name` for layout tags, etc.

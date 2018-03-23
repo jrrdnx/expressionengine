@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.1.0
+
+* Added completionProvider (suggestions)
+* Added `expressionengine.suggest.basic` user/workspace setting to control suggestions
+
 ## 0.0.8
 
 * Make spaces around keyword operators optional

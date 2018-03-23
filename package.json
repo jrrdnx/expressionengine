@@ -2,7 +2,7 @@
     "name": "expressionengine",
     "displayName": "ExpressionEngine",
     "description": "ExpressionEngine syntax highlighting for VS Code",
-    "version": "0.0.8",
+    "version": "0.1.0",
     "publisher": "jrrdnx",
     "license": "SEE LICENSE IN ./LICENSE",
     "icon": "expressionengine.png",
@@ -12,6 +12,10 @@
     "categories": [
         "Languages"
     ],
+	"activationEvents": [
+		"onLanguage:expressionengine"
+	],
+	"main": "./main/expressionEngineMain",
     "contributes": {
         "languages": [
             {
@@ -33,7 +37,18 @@
                 "scopeName": "text.html.expressionengine",
                 "path": "./syntaxes/expressionengine.tmLanguage.json"
             }
-        ]
+        ],
+		"configuration": {
+			"title": "ExpressionEngine",
+			"type": "object",
+			"properties": {
+				"expressionengine.suggest.basic": {
+					"type": "boolean",
+					"default": true,
+					"description": "Configures if ExpressionEngine language suggestions are enabled. The support suggests Expressionengine globals and tags."
+				}
+			}
+		}
     },
     "repository": {
         "type": "git",
