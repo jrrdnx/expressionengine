@@ -33,14 +33,16 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 			}
 			return proposal;
 		};
-		for (var variables in expressionEngineGlobals.variables) {
-			if (expressionEngineGlobals.variables.hasOwnProperty(variables) && matches(variables)) {
-				result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, expressionEngineGlobals.variables[variables]));
+		if (context.triggerCharacter === '{') {
+			for (var variables in expressionEngineGlobals.variables) {
+				if (expressionEngineGlobals.variables.hasOwnProperty(variables) && matches(variables)) {
+					result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, expressionEngineGlobals.variables[variables]));
+				}
 			}
-		}
-		for (var exptags in expressionEngineTags.exptags) {
-			if (expressionEngineTags.exptags.hasOwnProperty(exptags) && matches(exptags)) {
-				result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, expressionEngineTags.exptags[exptags]));
+			for (var exptags in expressionEngineTags.exptags) {
+				if (expressionEngineTags.exptags.hasOwnProperty(exptags) && matches(exptags)) {
+					result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, expressionEngineTags.exptags[exptags]));
+				}
 			}
 		}
         return Promise.resolve(result);
