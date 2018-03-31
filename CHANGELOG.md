@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.1
+
+* Limit current completion items to trigger only on ‘{‘ character
+
 ## 0.1.0
 
 * Added completionProvider (suggestions)
