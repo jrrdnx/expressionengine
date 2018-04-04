@@ -34,8 +34,35 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 			return proposal;
 		};
 		if (context.triggerCharacter === '{') {
+			// Cancel for Angular expressions (double curly braces)
+			var twoBeforeCursor = new vscode_1.Position(position.line, Math.max(0, position.character - 2));
+			var previousTwoChars = document.getText(new vscode_1.Range(twoBeforeCursor, position));
+			if (previousTwoChars.length === 2 && previousTwoChars === '{{') {
+				return Promise.resolve(result);
+			}
+
 			for (var variables in expressionEngineGlobals.variables) {
 				if (expressionEngineGlobals.variables.hasOwnProperty(variables) && matches(variables)) {
+					result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, expressionEngineGlobals.variables[variables]));
+				}
+			}
+			for (var exptags in expressionEngineTags.exptags) {
+				if (expressionEngineTags.exptags.hasOwnProperty(exptags) && matches(exptags)) {
+					result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, expressionEngineTags.exptags[exptags]));
+				}
+			}
+		}
+		if (context.triggerCharacter === '/') {
+			// Enable for closing tags
+			var twoBeforeCursor = new vscode_1.Position(position.line, Math.max(0, position.character - 2));
+			var previousTwoChars = document.getText(new vscode_1.Range(twoBeforeCursor, position));
+			if (previousTwoChars.length !== 2 || previousTwoChars !== '{/') {
+				return Promise.resolve(result);
+			}
+
+			// Only globals with closingTags = true
+			for (var variables in expressionEngineGlobals.variables) {
+				if (expressionEngineGlobals.variables.hasOwnProperty(variables) && matches(variables) && expressionEngineGlobals.variables[variables].closingTag) {
 					result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, expressionEngineGlobals.variables[variables]));
 				}
 			}

@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.1.2
+
+* Now prevents suggestions for Angular expressions
+* Proposes suggestions for closing tags/variables (when `{/` has been typed)
+
 ## 0.1.1
 
 * Limit current completion items to trigger only on ‘{‘ character
