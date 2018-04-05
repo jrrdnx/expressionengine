@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.3
+
+* Allow `layout:set`, `layout:set:append`, and `layout:set:prepend` to show in closing tag suggestions
+
 ## 0.1.2
 
 * Now prevents suggestions for Angular expressions
