@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.2.0
+
+* Enable suggestions for parameters for tags when space character is typed (i.e. `channel`, `limit`, `disable`, etc. for `exp:channel:entries`)
+  * Currently requires the cursor to be positioned on the same line as the tag, support for multi-line tags is planned
+
 ## 0.1.3
 
 * Allow `layout:set`, `layout:set:append`, and `layout:set:prepend` to show in closing tag suggestions
@@ -7,7 +12,7 @@
 ## 0.1.2
 
 * Now prevents suggestions for Angular expressions
-* Proposes suggestions for closing tags/variables (when `{/` has been typed)
+* Enable suggestions for closing tags/variables (when `{/` has been typed)
 
 ## 0.1.1
 

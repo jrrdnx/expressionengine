@@ -2,6 +2,7 @@
 .vscode-test/**
 .gitignore
 expressionengine.jpg
+tests.html
 vsc-extension-quickstart.md
 /syntaxes/ee.cson
 /syntaxes/ee.json

@@ -81,15 +81,15 @@ exports.variables = {
 	},
 	"layout:set": {
 		description: 'Set a variable in your templates that can later be used in your layouts.',
-		closingTag: true
+		hasClosingTag: true
 	},
 	"layout:set:append": {
 		description: 'Create a list in a variable and append new values.',
-		closingTag: true
+		hasClosingTag: true
 	},
 	"layout:set:prepend": {
 		description: 'Create a list in a variable and prepend new values.',
-		closingTag: true
+		hasClosingTag: true
 	},
 	member_group: {
 		description: 'The Member Group ID number for the currently logged-in user.',

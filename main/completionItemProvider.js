@@ -33,6 +33,8 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 			}
 			return proposal;
 		};
+
+		// Opening tag/global variable
 		if (context.triggerCharacter === '{') {
 			// Cancel for Angular expressions (double curly braces)
 			var twoBeforeCursor = new vscode_1.Position(position.line, Math.max(0, position.character - 2));
@@ -52,6 +54,8 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 				}
 			}
 		}
+
+		// Closing tag/global variable
 		if (context.triggerCharacter === '/') {
 			// Enable for closing tags
 			var twoBeforeCursor = new vscode_1.Position(position.line, Math.max(0, position.character - 2));
@@ -60,9 +64,9 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 				return Promise.resolve(result);
 			}
 
-			// Only globals with closingTags = true
+			// Only globals with hasClosingTag = true
 			for (var variables in expressionEngineGlobals.variables) {
-				if (expressionEngineGlobals.variables.hasOwnProperty(variables) && matches(variables) && expressionEngineGlobals.variables[variables].closingTag) {
+				if (expressionEngineGlobals.variables.hasOwnProperty(variables) && matches(variables) && expressionEngineGlobals.variables[variables].hasClosingTag) {
 					result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, expressionEngineGlobals.variables[variables]));
 				}
 			}
@@ -72,6 +76,55 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 				}
 			}
 		}
+
+		/**
+		*	Inside a tag?
+		*/
+		if (context.triggerCharacter === ' ') {
+			var currentLine = document.getText(new vscode_1.Range(new vscode_1.Position(position.line, 0), position));
+			// Get all opening curly braces
+			var fromIndex = 0,
+				closestOpenBrace,
+				closestCloseBrace,
+				openBraces = [],
+				openBrace = currentLine.indexOf('{', fromIndex);
+			do {
+				openBraces.push(openBrace);
+				fromIndex = openBrace >= 0 ? openBrace + 1 : 0;
+				openBrace = currentLine.indexOf('{', fromIndex);
+			} while (openBrace !== -1);
+			for (var i = 0; i < openBraces.length; i++) {
+				if (openBraces[i] < position.character) closestOpenBrace = openBraces[i];
+			}
+
+			// Get all closing curly braces
+			fromIndex = 0;
+			var closeBraces = [],
+				closeBrace = currentLine.indexOf('}', fromIndex);
+			do {
+				closeBraces.push(closeBrace);
+				fromIndex = closeBrace >= 0 ? closeBrace + 1 : 0;
+				closeBrace = currentLine.indexOf('}', fromIndex);
+			} while (closeBrace !== -1);
+			for (var i = 0; i < closeBraces.length; i++) {
+				if (closeBraces[i] < position.character) closestCloseBrace = closeBraces[i];
+			}
+
+			// Yes, inside a tag
+			if (closestOpenBrace !== -1 && closestCloseBrace < closestOpenBrace) {
+				var endOfTagPosition = currentLine.indexOf(' ', closestOpenBrace);
+				var tag = document.getText(new vscode_1.Range(new vscode_1.Position(position.line, closestOpenBrace + 1), new vscode_1.Position(position.line, endOfTagPosition)));
+
+				if (tag.slice(0, 4) === 'exp:') {// || tag.slice(0, 11) === 'layout:set:') {
+					for (var tagParameters in expressionEngineParameters[tag]) {
+						if (expressionEngineParameters[tag].hasOwnProperty(tagParameters) && matches(tagParameters)) {
+							result.push(createNewProposal(vscode_1.CompletionItemKind.Property, tagParameters, Object()));
+						}
+					}
+				}
+			}
+		}
+
         return Promise.resolve(result);
     };
 	return expressionEngineCompletionItemProvider;
