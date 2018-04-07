@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.2.1
+
+* Fix missing require() necessary for tag parameter suggestions (oops!)
+* Add parameter suggestions for `layout:set` variables
+* Update .vscodeignore
+
 ## 0.2.0
 
 * Enable suggestions for parameters for tags when space character is typed (i.e. `channel`, `limit`, `disable`, etc. for `exp:channel:entries`)
