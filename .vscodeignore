@@ -4,8 +4,8 @@
 expressionengine.jpg
 tests.html
 vsc-extension-quickstart.md
-/syntaxes/ee.cson
-/syntaxes/ee.json
-/syntaxes/ee.tmLanguage.EXTENSION
-/syntaxes/html.tmLanguage
-/syntaxes/html.tmLanguage.json.VSCODE
+syntaxes/ee.cson
+syntaxes/ee.json
+syntaxes/ee.tmLanguage.EXTENSION
+syntaxes/html.tmLanguage
+syntaxes/html.tmLanguage.json.VSCODE

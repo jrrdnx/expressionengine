@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var vscode_1 = require("vscode");
 var expressionEngineGlobals = require("./expressionEngineGlobals");
 var expressionEngineTags = require("./expressionEngineTags");
+var expressionEngineParameters = require("./expressionEngineParameters");
 var expressionEngineCompletionItemProvider = /** @class */ (function () {
 	function expressionEngineCompletionItemProvider() {
     }
@@ -115,7 +116,7 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 				var endOfTagPosition = currentLine.indexOf(' ', closestOpenBrace);
 				var tag = document.getText(new vscode_1.Range(new vscode_1.Position(position.line, closestOpenBrace + 1), new vscode_1.Position(position.line, endOfTagPosition)));
 
-				if (tag.slice(0, 4) === 'exp:') {// || tag.slice(0, 11) === 'layout:set:') {
+				if (tag.slice(0, 4) === 'exp:' || tag.slice(0, 11) === 'layout:set:') {
 					for (var tagParameters in expressionEngineParameters[tag]) {
 						if (expressionEngineParameters[tag].hasOwnProperty(tagParameters) && matches(tagParameters)) {
 							result.push(createNewProposal(vscode_1.CompletionItemKind.Property, tagParameters, Object()));
