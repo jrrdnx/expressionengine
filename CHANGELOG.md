@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.2
+
+* Update icon and Marketplace banner color
+
 ## 0.2.1
 
 * Fix missing require() necessary for tag parameter suggestions (oops!)
