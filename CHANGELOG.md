@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.3
+
+* Added disclaimer
+
 ## 0.2.2
 
 * Update icon and Marketplace banner color

@@ -53,3 +53,7 @@ As of **v0.0.4** the following naming conventions are used:
 ## Release Notes
 
 See the [CHANGELOG](./CHANGELOG.md)
+
+## Disclaimer
+
+The ExpressionEngine mark is owned and may be registered by EllisLab, Inc. This VS Code extension is an independent project and has not been authorized, sponsored, or otherwise approved by EllisLab, Inc.
