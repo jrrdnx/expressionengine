@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.6
+
+* Improve parameter suggestions with required flags, type, values, and defaults
+
 ## 0.2.5
 
 * Limit closing tag suggestions to only those that have closing tags
