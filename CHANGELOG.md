@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.7
+
+* Implement the VS Code default html formatting indent/outdent logic
+
 ## 0.2.6
 
 * Improve parameter suggestions with required flags, type, values, and defaults
