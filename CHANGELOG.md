@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.2.4
+
+* Enable parameter suggestions for multi-line tags (triggered on new lines and spaces)
+* Fix parameter suggestion descriptions
+
 ## 0.2.3
 
 * Added disclaimer

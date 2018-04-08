@@ -9,7 +9,7 @@ function activate(context) {
     // var validator = new validationProvider_1.default(context.workspaceState);
     // validator.activate(context.subscriptions);
     /* add providers */
-	context.subscriptions.push(vscode.languages.registerCompletionItemProvider('expressionengine', new completionItemProvider_1.default(), '{', '/', ' '));
+	context.subscriptions.push(vscode.languages.registerCompletionItemProvider('expressionengine', new completionItemProvider_1.default(), '{', '/', ' ', "\r", "\n"));
     // context.subscriptions.push(vscode.languages.registerHoverProvider('expressionengine', new hoverProvider_1.default()));
     // context.subscriptions.push(vscode.languages.registerSignatureHelpProvider('expressionengine', new signatureHelpProvider_1.default(), '(', ','));
     /* need to set in the extension host as well as the completion provider uses it. */

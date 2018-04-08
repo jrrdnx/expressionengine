@@ -81,45 +81,52 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 		/**
 		*	Inside a tag?
 		*/
-		if (context.triggerCharacter === ' ') {
-			var currentLine = document.getText(new vscode_1.Range(new vscode_1.Position(position.line, 0), position));
-			// Get all opening curly braces
-			var fromIndex = 0,
-				closestOpenBrace,
-				closestCloseBrace,
-				openBraces = [],
-				openBrace = currentLine.indexOf('{', fromIndex);
-			do {
-				openBraces.push(openBrace);
-				fromIndex = openBrace >= 0 ? openBrace + 1 : 0;
-				openBrace = currentLine.indexOf('{', fromIndex);
-			} while (openBrace !== -1);
-			for (var i = 0; i < openBraces.length; i++) {
-				if (openBraces[i] < position.character) closestOpenBrace = openBraces[i];
-			}
+		if (context.triggerCharacter === ' ' || context.triggerCharacter === "\r" || context.triggerCharacter === "\n" || context.triggerKind === 0) {
+			var lineNumber = position.line;
 
-			// Get all closing curly braces
-			fromIndex = 0;
-			var closeBraces = [],
-				closeBrace = currentLine.indexOf('}', fromIndex);
 			do {
-				closeBraces.push(closeBrace);
-				fromIndex = closeBrace >= 0 ? closeBrace + 1 : 0;
-				closeBrace = currentLine.indexOf('}', fromIndex);
-			} while (closeBrace !== -1);
-			for (var i = 0; i < closeBraces.length; i++) {
-				if (closeBraces[i] < position.character) closestCloseBrace = closeBraces[i];
-			}
+				var currentLine = (position.line == lineNumber ? document.getText(new vscode_1.Range(new vscode_1.Position(position.line, 0), position)) : document.lineAt(lineNumber).text);
+
+				// Get all opening curly braces
+				var fromIndex = 0,
+					closestOpenBrace,
+					closestCloseBrace,
+					openBraces = [],
+					openBrace = currentLine.indexOf('{', fromIndex);
+				do {
+					openBraces.push(openBrace);
+					fromIndex = openBrace >= 0 ? openBrace + 1 : 0;
+					openBrace = currentLine.indexOf('{', fromIndex);
+				} while (openBrace !== -1);
+				closestOpenBrace = openBraces[openBraces.length - 1];
+
+				// Get all closing curly braces
+				fromIndex = 0;
+				var closeBraces = [],
+					closeBrace = currentLine.indexOf('}', fromIndex);
+				do {
+					closeBraces.push(closeBrace);
+					fromIndex = closeBrace >= 0 ? closeBrace + 1 : 0;
+					closeBrace = currentLine.indexOf('}', fromIndex);
+				} while (closeBrace !== -1);
+				closestCloseBrace = closeBraces[closeBraces.length - 1];
+
+				lineNumber--;
+			} while (closestOpenBrace === -1 && closestCloseBrace === -1 && lineNumber >= 0);
 
 			// Yes, inside a tag
 			if (closestOpenBrace !== -1 && closestCloseBrace < closestOpenBrace) {
-				var endOfTagPosition = currentLine.indexOf(' ', closestOpenBrace);
-				var tag = document.getText(new vscode_1.Range(new vscode_1.Position(position.line, closestOpenBrace + 1), new vscode_1.Position(position.line, endOfTagPosition)));
+				var tagSubstr = currentLine.substr(closestOpenBrace);
+				if (tagSubstr.indexOf(' ') !== -1) {
+					var tag = tagSubstr.substr(1, tagSubstr.indexOf(' ') - 1);
+				} else {
+					var tag = tagSubstr.substr(1);
+				}
 
 				if (tag.slice(0, 4) === 'exp:' || tag.slice(0, 11) === 'layout:set:') {
 					for (var tagParameters in expressionEngineParameters[tag]) {
 						if (expressionEngineParameters[tag].hasOwnProperty(tagParameters) && matches(tagParameters)) {
-							result.push(createNewProposal(vscode_1.CompletionItemKind.Property, tagParameters, Object()));
+							result.push(createNewProposal(vscode_1.CompletionItemKind.Property, tagParameters, expressionEngineParameters[tag][tagParameters]));
 						}
 					}
 				}
