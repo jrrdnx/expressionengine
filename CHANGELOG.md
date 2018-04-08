@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.5
+
+* Limit closing tag suggestions to only those that have closing tags
+
 ## 0.2.4
 
 * Enable parameter suggestions for multi-line tags (triggered on new lines and spaces)

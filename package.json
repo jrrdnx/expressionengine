@@ -2,7 +2,7 @@
     "name": "expressionengine",
     "displayName": "ExpressionEngine",
     "description": "ExpressionEngine syntax highlighting for VS Code",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "publisher": "jrrdnx",
     "license": "SEE LICENSE IN ./LICENSE",
 	"icon": "expressionengine.png",

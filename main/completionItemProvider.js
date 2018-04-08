@@ -72,7 +72,7 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 				}
 			}
 			for (var exptags in expressionEngineTags.exptags) {
-				if (expressionEngineTags.exptags.hasOwnProperty(exptags) && matches(exptags)) {
+				if (expressionEngineTags.exptags.hasOwnProperty(exptags) && matches(exptags) && expressionEngineTags.exptags[exptags].hasClosingTag) {
 					result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, expressionEngineTags.exptags[exptags]));
 				}
 			}
