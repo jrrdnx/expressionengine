@@ -25,11 +25,11 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 			var proposal = new vscode_1.CompletionItem(name);
 			proposal.kind = kind;
 			if (entry) {
-				if (entry.description) {
-					proposal.documentation = entry.description;
+				if (entry.documentation) {
+					proposal.documentation = entry.documentation;
 				}
-				if (entry.signature) {
-					proposal.detail = entry.signature;
+				if (entry.detail) {
+					proposal.detail = entry.detail;
 				}
 			}
 			return proposal;
@@ -123,7 +123,7 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 					var tag = tagSubstr.substr(1);
 				}
 
-				if (tag.slice(0, 4) === 'exp:' || tag.slice(0, 11) === 'layout:set:') {
+				if (tag.slice(0, 4) === 'exp:' || tag.slice(0, 7) === 'layout:') {
 					for (var tagParameters in expressionEngineParameters[tag]) {
 						if (expressionEngineParameters[tag].hasOwnProperty(tagParameters) && matches(tagParameters)) {
 							result.push(createNewProposal(vscode_1.CompletionItemKind.Property, tagParameters, expressionEngineParameters[tag][tagParameters]));
