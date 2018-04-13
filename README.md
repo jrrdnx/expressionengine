@@ -1,6 +1,6 @@
-# ExpressionEngine Language Features
+# ExpressionEngine language features for VS Code
 
-* Enables syntax highlighting for tags, variables, including HTML and PHP code
+* Enables syntax highlighting for tags, variables, comments, conditionals, and strings without overwriting HTML and PHP code syntax highlighting
 * Adds code completion (suggestions) for tags, global variables, and tag parameters
 * Auto-closing tags and variables
 
