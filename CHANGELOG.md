@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.3.0
+
+* Added functionality for auto closing ExpressionEngine tags/variables
+* Added `expressionengine.autoClosingTags` user/workspace setting to control auto closing tags/variables
+* Added parameter suggestions for some global variables
+  * `current_time`
+  * `encode`
+  * `redirect`
+  * `template_edit_date`
+
 ## 0.2.7
 
 * Implement the VS Code default html formatting indent/outdent logic

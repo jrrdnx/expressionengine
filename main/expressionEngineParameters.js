@@ -1347,4 +1347,28 @@ module.exports = {
 			detail: 'Type: string',
 		}
 	},
+	current_time: {
+		format: {
+			documentation: 'Date variable formatting codes or pre-defined constants.',
+			detail: 'Type: string',
+		}
+	},
+	encode: {
+		title: {
+			documentation: 'Specify the title for the encoded link.',
+			detail: 'Type: string',
+		}
+	},
+	redirect: {
+		status_code: {
+			documentation: 'Specify a 3XX redirect code.',
+			detail: 'Type: string'
+		}
+	},
+	template_edit_date: {
+		format: {
+			documentation: 'Date variable formatting codes or pre-defined constants.',
+			detail: 'Type: string',
+		}
+	},
 };

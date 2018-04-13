@@ -2,7 +2,7 @@
     "name": "expressionengine",
     "displayName": "ExpressionEngine",
     "description": "ExpressionEngine syntax highlighting for VS Code",
-    "version": "0.2.7",
+    "version": "0.3.0",
     "publisher": "jrrdnx",
     "license": "SEE LICENSE IN ./LICENSE",
 	"icon": "expressionengine.png",
@@ -50,6 +50,11 @@
 					"type": "boolean",
 					"default": true,
 					"description": "Configures if ExpressionEngine language suggestions are enabled. The support suggests Expressionengine globals and tags."
+				},
+				"expressionengine.autoClosingTags": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable/disable autoclosing of ExpressionEngine tags."
 				}
 			}
 		}

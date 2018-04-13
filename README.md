@@ -1,12 +1,15 @@
-# ExpressionEngine syntax highlighting
+# ExpressionEngine Language Features
 
-Enables syntax highlighting for ExpressionEngine's templating language, including HTML and PHP code.
+* Enables syntax highlighting for tags, variables, including HTML and PHP code
+* Adds code completion (suggestions) for tags, global variables, and tag parameters
+* Auto-closing tags and variables
 
 ![feature X](./example.png)
 
 ## Settings
 
 * `expressionengine.suggest.basic`: enable/disable language suggestions (tags and variables). Default: **true**
+* `expressionengine.autoClosingTags`: enable/disable auto closing ExpressionEngine tags and variables. Default: **true**
 
 ## Customizing Colors
 
