@@ -35,7 +35,7 @@ exports.variables = {
 		documentation: 'This variable outputs the current URI path relative to your ExpressionEngine installation.',
 	},
 	current_time: {
-		documentation: 'This variable displays the current server time localized to each user’s particular setting.',
+		documentation: 'This variable displays the current server time localized to each user\'s particular setting.',
 	},
 	current_query_string: {
 		documentation: 'This variable displays the current security-filtered query string.',
