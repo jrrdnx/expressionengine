@@ -30,7 +30,8 @@
                 ],
                 "extensions": [
                     ".html",
-                    ".feed"
+                    ".feed",
+                    ".xml"
                 ],
                 "configuration": "./language-configuration.json"
             }
