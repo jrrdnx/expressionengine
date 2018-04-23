@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.4.0
+
+* Added `.xml` extension to list of supported files
+* Added `expressionengine.thirdPartyAddonPath` user/workspace setting to control paths to addons directory on a user or workspace level
+* Added support for third party addon suggestions for tags, parameters, and globals
+  * Requires third party addon suggestions to be defined
+  * Only includes suggestions for addons that are currently present in the workspace
+* Added [CONTRIBUTIONS](./CONTRIBUTIONS.md) with instructions for third party addon developers
+
 ## 0.3.0
 
 * Added functionality for auto closing ExpressionEngine tags/variables

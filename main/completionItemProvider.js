@@ -1,22 +1,30 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 var vscode_1 = require("vscode");
+const { lstatSync, readdirSync, existsSync } = require('fs');
+const { join } = require('path');
+const isDirectory = source => lstatSync(source).isDirectory();
+const getDirectories = source => readdirSync(source).map(name => join(source, name)).filter(isDirectory);
 var expressionEngineGlobals = require("./expressionEngineGlobals");
 var expressionEngineTags = require("./expressionEngineTags");
 var expressionEngineParameters = require("./expressionEngineParameters");
+
+const thirdPartyAddonPath = vscode_1.workspace.getConfiguration('expressionengine').get('thirdPartyAddonPath', '${rootPath}/httpdocs/system/user/addons/').replace("${rootPath}", vscode_1.workspace.workspaceFolders[0].uri).replace("file://", "");
+const thirdPartyDefinitionPath = vscode_1.extensions.getExtension("jrrdnx.expressionengine").extensionPath + "/main/third_party/";
+
 var expressionEngineCompletionItemProvider = /** @class */ (function () {
 	function expressionEngineCompletionItemProvider() {
-    }
+	}
 	expressionEngineCompletionItemProvider.prototype.provideCompletionItems = function (document, position, _token, context) {
-        var result = [];
-        var shouldProvideCompletionItems = vscode_1.workspace.getConfiguration('expressionengine').get('suggest.basic', true);
-        if (!shouldProvideCompletionItems) {
-            return Promise.resolve(result);
-        }
-        var range = document.getWordRangeAtPosition(position);
-        var prefix = range ? document.getText(range) : '';
-        if (!range) {
-            range = new vscode_1.Range(position, position);
+		var result = [];
+		var shouldProvideCompletionItems = vscode_1.workspace.getConfiguration('expressionengine').get('suggest.basic', true);
+		if (!shouldProvideCompletionItems) {
+			return Promise.resolve(result);
+		}
+		var range = document.getWordRangeAtPosition(position);
+		var prefix = range ? document.getText(range) : '';
+		if (!range) {
+			range = new vscode_1.Range(position, position);
 		}
 		var matches = function (name) {
 			return prefix.length === 0 || name.length >= prefix.length && name.substr(0, prefix.length) === prefix;
@@ -54,6 +62,31 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 					result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, expressionEngineTags.exptags[exptags]));
 				}
 			}
+
+			// Include third party addons
+			var addonName,
+				addonTags,
+				dirs = getDirectories(thirdPartyAddonPath);
+			for (var dir in dirs) {
+				addonName = dirs[dir].substring(dirs[dir].lastIndexOf('/') + 1);
+
+				if (existsSync(thirdPartyDefinitionPath + addonName + "/") && existsSync(thirdPartyDefinitionPath + addonName + "/tags.js")) {
+					addonTags = require(thirdPartyDefinitionPath + addonName + "/tags.js");
+					for (var exptags in addonTags.exptags) {
+						if (addonTags.exptags.hasOwnProperty(exptags) && matches(exptags)) {
+							result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, addonTags.exptags[exptags]));
+						}
+					}
+				}
+				if (existsSync(thirdPartyDefinitionPath + addonName + "/") && existsSync(thirdPartyDefinitionPath + addonName + "/globals.js")) {
+					addonGlobals = require(thirdPartyDefinitionPath + addonName + "/globals.js");
+					for (var variables in addonGlobals.variables) {
+						if (addonGlobals.variables.hasOwnProperty(variables) && matches(variables)) {
+							result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, addonGlobals.variables[variables]));
+						}
+					}
+				}
+			}
 		}
 
 		// Closing tag/global variable
@@ -74,6 +107,31 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 			for (var exptags in expressionEngineTags.exptags) {
 				if (expressionEngineTags.exptags.hasOwnProperty(exptags) && matches(exptags) && expressionEngineTags.exptags[exptags].hasClosingTag) {
 					result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, expressionEngineTags.exptags[exptags]));
+				}
+			}
+
+			// Include third party addons
+			var addonName,
+				addonTags,
+				dirs = getDirectories(thirdPartyAddonPath);
+			for (var dir in dirs) {
+				addonName = dirs[dir].substring(dirs[dir].lastIndexOf('/') + 1);
+
+				if (existsSync(thirdPartyDefinitionPath + addonName + "/") && existsSync(thirdPartyDefinitionPath + addonName + "/tags.js")) {
+					addonTags = require(thirdPartyDefinitionPath + addonName + "/tags.js");
+					for (var exptags in addonTags.exptags) {
+						if (addonTags.exptags.hasOwnProperty(exptags) && matches(exptags) && addonTags.exptags[exptags].hasClosingTag) {
+							result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, addonTags.exptags[exptags]));
+						}
+					}
+				}
+				if (existsSync(thirdPartyDefinitionPath + addonName + "/") && existsSync(thirdPartyDefinitionPath + addonName + "/globals.js")) {
+					addonGlobals = require(thirdPartyDefinitionPath + addonName + "/globals.js");
+					for (var variables in addonGlobals.variables) {
+						if (addonGlobals.variables.hasOwnProperty(variables) && matches(variables) && addonGlobals.variables[variables].hasClosingTag) {
+							result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, addonGlobals.variables[variables]));
+						}
+					}
 				}
 			}
 		}
@@ -129,12 +187,29 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 							result.push(createNewProposal(vscode_1.CompletionItemKind.Property, tagParameters, expressionEngineParameters[tag][tagParameters]));
 						}
 					}
+
+					// Include third party addons
+					var addonName,
+						addonTags,
+						dirs = getDirectories(thirdPartyAddonPath);
+					for (var dir in dirs) {
+						addonName = dirs[dir].substring(dirs[dir].lastIndexOf('/') + 1);
+
+						if (existsSync(thirdPartyDefinitionPath + addonName + "/") && existsSync(thirdPartyDefinitionPath + addonName + "/parameters.js")) {
+							addonTags = require(thirdPartyDefinitionPath + addonName + "/parameters.js");
+							for (var tagParameters in addonTags[tag]) {
+								if (addonTags[tag].hasOwnProperty(tagParameters) && matches(tagParameters)) {
+									result.push(createNewProposal(vscode_1.CompletionItemKind.Property, tagParameters, addonTags[tag][tagParameters]));
+								}
+							}
+						}
+					}
 				}
 			}
 		}
 
-        return Promise.resolve(result);
-    };
+		return Promise.resolve(result);
+	};
 	return expressionEngineCompletionItemProvider;
 }());
 exports.default = expressionEngineCompletionItemProvider;

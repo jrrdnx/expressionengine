@@ -1,48 +1,48 @@
 {
-    "name": "expressionengine",
-    "displayName": "ExpressionEngine",
-    "description": "ExpressionEngine language features for VS Code",
-    "version": "0.3.0",
-    "publisher": "jrrdnx",
-    "license": "SEE LICENSE IN ./LICENSE",
+	"name": "expressionengine",
+	"displayName": "ExpressionEngine",
+	"description": "ExpressionEngine language features for VS Code",
+	"version": "0.4.0",
+	"publisher": "jrrdnx",
+	"license": "SEE LICENSE IN ./LICENSE",
 	"icon": "expressionengine.png",
 	"galleryBanner": {
 		"color": "#000000",
 		"theme": "dark"
 	},
-    "engines": {
-        "vscode": "^1.0.0"
-    },
-    "categories": [
-        "Languages"
-    ],
+	"engines": {
+		"vscode": "^1.0.0"
+	},
+	"categories": [
+		"Languages"
+	],
 	"activationEvents": [
 		"onLanguage:expressionengine"
 	],
 	"main": "./main/expressionEngineMain",
-    "contributes": {
-        "languages": [
-            {
-                "id": "expressionengine",
-                "aliases": [
-                    "ExpressionEngine",
-                    "expressionengine"
-                ],
-                "extensions": [
-                    ".html",
-                    ".feed",
-                    ".xml"
-                ],
-                "configuration": "./language-configuration.json"
-            }
-        ],
-        "grammars": [
-            {
-                "language": "expressionengine",
-                "scopeName": "text.html.expressionengine",
-                "path": "./syntaxes/expressionengine.tmLanguage.json"
-            }
-        ],
+	"contributes": {
+		"languages": [
+			{
+				"id": "expressionengine",
+				"aliases": [
+					"ExpressionEngine",
+					"expressionengine"
+				],
+				"extensions": [
+					".html",
+					".feed",
+					".xml"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "expressionengine",
+				"scopeName": "text.html.expressionengine",
+				"path": "./syntaxes/expressionengine.tmLanguage.json"
+			}
+		],
 		"configuration": {
 			"title": "ExpressionEngine",
 			"type": "object",
@@ -56,12 +56,17 @@
 					"type": "boolean",
 					"default": true,
 					"description": "Enable/disable autoclosing of ExpressionEngine tags."
+				},
+				"expressionengine.thirdPartyAddonPath": {
+					"type": "string",
+					"default": "${rootPath}/httpdocs/system/user/addons/",
+					"description": "Path to your third party extensions directory. Variables are substituted based on the context:\n${rootPath}: file path of the workspace (e.g. /Users/Development/myWorkspace)"
 				}
 			}
 		}
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jrrdnx/expressionengine"
-    }
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jrrdnx/expressionengine"
+	}
 }

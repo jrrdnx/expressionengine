@@ -1,7 +1,7 @@
 # ExpressionEngine language features for VS Code
 
 * Enables syntax highlighting for tags, variables, comments, conditionals, and strings without overwriting HTML and PHP code syntax highlighting
-* Adds code completion (suggestions) for tags, global variables, and tag parameters
+* Adds code completion (suggestions) for tags, global variables, and tag parameters including third party addons!
 * Auto-closing tags and variables
 
 ![feature X](./example.png)
@@ -10,6 +10,8 @@
 
 * `expressionengine.suggest.basic`: enable/disable language suggestions (tags and variables). Default: **true**
 * `expressionengine.autoClosingTags`: enable/disable auto closing ExpressionEngine tags and variables. Default: **true**
+* `expressionengine.thirdPartyAddonPath`: path to your third party extensions directory. Default: **${rootPath}/httpdocs/system/user/addons/**
+  * Include a `${rootPath}` variable to be substituted with the file path of the workspace (e.g. `${rootPath}/httpdocs/system/user/addons/` becomes `/Users/Development/Project/httpdocs/system/user/addons/`)
 
 ## Customizing Colors
 
@@ -56,6 +58,14 @@ As of **v0.0.4** the following naming conventions are used:
 ## Release Notes
 
 See the [CHANGELOG](./CHANGELOG.md)
+
+## Contributions
+
+See the [CONTRIBUTIONS](./CONTRIBUTIONS.md)
+
+## Attributions
+
+Many thanks to [@adrum](https://github.com/adrum) for help in debugging the initial parameter suggestions and the third party addon suggestions, as well as continued help with all things Node/npm
 
 ## Disclaimer
 
