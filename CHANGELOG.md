@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.1
+
+* Updated the method with which third party addon suggestions are included. Now requires an `addon.json` file within the root folder of the addon. See the [README](./README.md) for more information.
+
 ## 0.4.0
 
 * Added `.xml` extension to list of supported files

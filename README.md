@@ -59,9 +59,50 @@ As of **v0.0.4** the following naming conventions are used:
 
 See the [CHANGELOG](./CHANGELOG.md)
 
-## Contributions
+## Third party addon suggestions
 
-See the [CONTRIBUTIONS](./CONTRIBUTIONS.md)
+In order for third party addon suggestions to be included, each addon must include an `addon.json` file in its root folder. While other information can be included, the completion provider is looking specifically for a `tags` property and a `variables` property:
+
+```json
+{
+  "tags": {
+    "exp:channel:entries": {
+      "documentation": "Short tag description...",
+      "hasClosingTag": true,
+      "parameters": {
+        "name": {
+          "documentation": "Short parameter description...",
+          "detail": "Type: string",
+        },
+        "path": {
+          "documentation": "Short parameter description...",
+          "detail": "Type: string",
+        }
+      }
+    }
+  },
+  "variables": {
+    "current_time": {
+      "documentation": "Short variable description...",
+      "parameters": {
+        "format": {
+          "documentation": "Short parameter description...",
+          "detail": "Type: string",
+        }
+      }
+    }
+  },
+}
+```
+
+* The `tags` and `variables` properties are both objects
+* Each tag/variable is a property of that respective object, with its value also an object
+* The `documentation` property is a string with a short description of that tag/variable
+* If the tag/variable has a closing tag, include the `hasClosingTag` property with a value of **true**. This enables the auto-closing tag feature (if the `expressionengine.autoClosingTags` setting is set to **true**). If there is no closing tag, this can be set to **false** or excluded completely.
+* If the tag/variable has any parameters, include a `parameters` property
+* Each parameter is a property of the `parameters` property, with its own `documentation` property featuring a short description
+* Parameters may also include a `detail` property with shorthand information regarding the type of value it's looking for, whether or not it's required, default value(s), etc. Newlines can be forced using "\n":
+  * `"detail": "Type: string|list\nValues: 'desc|asc'\nDefault: 'desc'",`
 
 ## Attributions
 

@@ -10,7 +10,6 @@ var expressionEngineTags = require("./expressionEngineTags");
 var expressionEngineParameters = require("./expressionEngineParameters");
 
 const thirdPartyAddonPath = vscode_1.workspace.getConfiguration('expressionengine').get('thirdPartyAddonPath', '${rootPath}/httpdocs/system/user/addons/').replace("${rootPath}", vscode_1.workspace.workspaceFolders[0].uri).replace("file://", "");
-const thirdPartyDefinitionPath = vscode_1.extensions.getExtension("jrrdnx.expressionengine").extensionPath + "/main/third_party/";
 
 var expressionEngineCompletionItemProvider = /** @class */ (function () {
 	function expressionEngineCompletionItemProvider() {
@@ -52,37 +51,34 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 				return Promise.resolve(result);
 			}
 
-			for (var variables in expressionEngineGlobals.variables) {
-				if (expressionEngineGlobals.variables.hasOwnProperty(variables) && matches(variables)) {
-					result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, expressionEngineGlobals.variables[variables]));
+			for (var expVariables in expressionEngineGlobals.variables) {
+				if (expressionEngineGlobals.variables.hasOwnProperty(expVariables) && matches(expVariables)) {
+					result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, expVariables, expressionEngineGlobals.variables[expVariables]));
 				}
 			}
-			for (var exptags in expressionEngineTags.exptags) {
-				if (expressionEngineTags.exptags.hasOwnProperty(exptags) && matches(exptags)) {
-					result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, expressionEngineTags.exptags[exptags]));
+			for (var expTags in expressionEngineTags.exptags) {
+				if (expressionEngineTags.exptags.hasOwnProperty(expTags) && matches(expTags)) {
+					result.push(createNewProposal(vscode_1.CompletionItemKind.Module, expTags, expressionEngineTags.exptags[expTags]));
 				}
 			}
 
 			// Include third party addons
 			var addonName,
-				addonTags,
+				addonDefs,
 				dirs = getDirectories(thirdPartyAddonPath);
 			for (var dir in dirs) {
 				addonName = dirs[dir].substring(dirs[dir].lastIndexOf('/') + 1);
 
-				if (existsSync(thirdPartyDefinitionPath + addonName + "/") && existsSync(thirdPartyDefinitionPath + addonName + "/tags.js")) {
-					addonTags = require(thirdPartyDefinitionPath + addonName + "/tags.js");
-					for (var exptags in addonTags.exptags) {
-						if (addonTags.exptags.hasOwnProperty(exptags) && matches(exptags)) {
-							result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, addonTags.exptags[exptags]));
+				if (existsSync(thirdPartyAddonPath + addonName + "/") && existsSync(thirdPartyAddonPath + addonName + "/addon.json")) {
+					addonDefs = require(thirdPartyAddonPath + addonName + "/addon.json");
+					for (var expTags in addonDefs.tags) {
+						if (addonDefs.tags.hasOwnProperty(expTags) && matches(expTags)) {
+							result.push(createNewProposal(vscode_1.CompletionItemKind.Module, expTags, addonDefs.tags[expTags]));
 						}
 					}
-				}
-				if (existsSync(thirdPartyDefinitionPath + addonName + "/") && existsSync(thirdPartyDefinitionPath + addonName + "/globals.js")) {
-					addonGlobals = require(thirdPartyDefinitionPath + addonName + "/globals.js");
-					for (var variables in addonGlobals.variables) {
-						if (addonGlobals.variables.hasOwnProperty(variables) && matches(variables)) {
-							result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, addonGlobals.variables[variables]));
+					for (var expVariables in addonDefs.variables) {
+						if (addonDefs.variables.hasOwnProperty(expVariables) && matches(expVariables)) {
+							result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, expVariables, addonDefs.variables[expVariables]));
 						}
 					}
 				}
@@ -99,37 +95,34 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 			}
 
 			// Only globals with hasClosingTag = true
-			for (var variables in expressionEngineGlobals.variables) {
-				if (expressionEngineGlobals.variables.hasOwnProperty(variables) && matches(variables) && expressionEngineGlobals.variables[variables].hasClosingTag) {
-					result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, expressionEngineGlobals.variables[variables]));
+			for (var expVariables in expressionEngineGlobals.variables) {
+				if (expressionEngineGlobals.variables.hasOwnProperty(expVariables) && matches(expVariables) && expressionEngineGlobals.variables[expVariables].hasClosingTag) {
+					result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, expVariables, expressionEngineGlobals.variables[expVariables]));
 				}
 			}
-			for (var exptags in expressionEngineTags.exptags) {
-				if (expressionEngineTags.exptags.hasOwnProperty(exptags) && matches(exptags) && expressionEngineTags.exptags[exptags].hasClosingTag) {
-					result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, expressionEngineTags.exptags[exptags]));
+			for (var expTags in expressionEngineTags.exptags) {
+				if (expressionEngineTags.exptags.hasOwnProperty(expTags) && matches(expTags) && expressionEngineTags.exptags[expTags].hasClosingTag) {
+					result.push(createNewProposal(vscode_1.CompletionItemKind.Module, expTags, expressionEngineTags.exptags[expTags]));
 				}
 			}
 
 			// Include third party addons
 			var addonName,
-				addonTags,
+				addonDefs,
 				dirs = getDirectories(thirdPartyAddonPath);
 			for (var dir in dirs) {
 				addonName = dirs[dir].substring(dirs[dir].lastIndexOf('/') + 1);
 
-				if (existsSync(thirdPartyDefinitionPath + addonName + "/") && existsSync(thirdPartyDefinitionPath + addonName + "/tags.js")) {
-					addonTags = require(thirdPartyDefinitionPath + addonName + "/tags.js");
-					for (var exptags in addonTags.exptags) {
-						if (addonTags.exptags.hasOwnProperty(exptags) && matches(exptags) && addonTags.exptags[exptags].hasClosingTag) {
-							result.push(createNewProposal(vscode_1.CompletionItemKind.Module, exptags, addonTags.exptags[exptags]));
+				if (existsSync(thirdPartyAddonPath + addonName + "/") && existsSync(thirdPartyAddonPath + addonName + "/addon.json")) {
+					addonDefs = require(thirdPartyAddonPath + addonName + "/addon.json");
+					for (var expTags in addonDefs.tags) {
+						if (addonDefs.tags.hasOwnProperty(expTags) && matches(expTags) && addonDefs.tags[expTags].hasClosingTag) {
+							result.push(createNewProposal(vscode_1.CompletionItemKind.Module, expTags, addonDefs.tags[expTags]));
 						}
 					}
-				}
-				if (existsSync(thirdPartyDefinitionPath + addonName + "/") && existsSync(thirdPartyDefinitionPath + addonName + "/globals.js")) {
-					addonGlobals = require(thirdPartyDefinitionPath + addonName + "/globals.js");
-					for (var variables in addonGlobals.variables) {
-						if (addonGlobals.variables.hasOwnProperty(variables) && matches(variables) && addonGlobals.variables[variables].hasClosingTag) {
-							result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, variables, addonGlobals.variables[variables]));
+					for (var expVariables in addonDefs.variables) {
+						if (addonDefs.variables.hasOwnProperty(expVariables) && matches(expVariables) && addonDefs.variables[expVariables].hasClosingTag) {
+							result.push(createNewProposal(vscode_1.CompletionItemKind.Variable, expVariables, addonDefs.variables[expVariables]));
 						}
 					}
 				}
@@ -190,16 +183,25 @@ var expressionEngineCompletionItemProvider = /** @class */ (function () {
 
 					// Include third party addons
 					var addonName,
-						addonTags,
+						addonDefs,
 						dirs = getDirectories(thirdPartyAddonPath);
 					for (var dir in dirs) {
 						addonName = dirs[dir].substring(dirs[dir].lastIndexOf('/') + 1);
 
-						if (existsSync(thirdPartyDefinitionPath + addonName + "/") && existsSync(thirdPartyDefinitionPath + addonName + "/parameters.js")) {
-							addonTags = require(thirdPartyDefinitionPath + addonName + "/parameters.js");
-							for (var tagParameters in addonTags[tag]) {
-								if (addonTags[tag].hasOwnProperty(tagParameters) && matches(tagParameters)) {
-									result.push(createNewProposal(vscode_1.CompletionItemKind.Property, tagParameters, addonTags[tag][tagParameters]));
+						if (existsSync(thirdPartyAddonPath + addonName + "/") && existsSync(thirdPartyAddonPath + addonName + "/addon.json")) {
+							addonDefs = require(thirdPartyAddonPath + addonName + "/addon.json");
+							if (addonDefs.tags.hasOwnProperty(tag)) {
+								for (var tagParameters in addonDefs.tags[tag].parameters) {
+									if (addonDefs.tags[tag].parameters.hasOwnProperty(tagParameters) && matches(tagParameters)) {
+										result.push(createNewProposal(vscode_1.CompletionItemKind.Property, tagParameters, addonDefs.tags[tag].parameters[tagParameters]));
+									}
+								}
+							}
+							if (addonDefs.variables.hasOwnProperty(tag)) {
+								for (var tagParameters in addonDefs.variables[tag].parameters) {
+									if (addonDefs.variables[tag].parameters.hasOwnProperty(tagParameters) && matches(tagParameters)) {
+										result.push(createNewProposal(vscode_1.CompletionItemKind.Property, tagParameters, addonDefs.variables[tag].parameters[tagParameters]));
+									}
 								}
 							}
 						}
